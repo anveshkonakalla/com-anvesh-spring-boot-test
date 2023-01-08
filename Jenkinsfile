@@ -16,7 +16,11 @@ pipeline{
 	                echo "BUILD_URL - $env.BUILD_URL"
 	                echo "GIT_COMMIT - $env.GIT_COMMIT"
 	                echo "GIT_BRANCH - $env.GIT_BRANCH"
-		       }            
+                    script {
+                        env.BUILD_NUMBER=env.GIT_COMMIT
+                    }
+		       }   
+                     
         }
         stage("Test"){
             steps{
