@@ -17,7 +17,7 @@ pipeline{
                 echo "JOB_NAME - $env.JOB_NAME"
                 echo "BUILD_TAG - $env.BUILD_TAG"
                 echo "BUILD_URL - $env.BUILD_URL"
-                echo "RELEASE_NOTES - $RELEASE_NOTES"
+                echo "RELEASE_NOTES - $env.RELEASE_NOTES"
 		       }            
         }
         stage("Test"){
