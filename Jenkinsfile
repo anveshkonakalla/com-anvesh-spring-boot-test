@@ -23,7 +23,12 @@ pipeline{
 	                echo "GIT_BRANCH - $env.GIT_BRANCH"
                     echo "mavenHome - $mavenHome"
                     echo "dockerHome - $dockerHome"
-                    sh 'mvn --version'
+                    script {
+                    	def version = sh script: 'mvn help:evaluate -Dexpression=project.version -q -DforceStdout', returnStdout: true
+                		def artifactId = sh script: 'mvn help:evaluate -Dexpression=project.artifactId -q -DforceStdout', returnStdout: true
+                		echo version
+                		echo artifactId
+                    }
 		       }   
                      
         }
