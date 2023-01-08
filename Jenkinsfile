@@ -14,6 +14,7 @@ pipeline{
                 echo "JOB_NAME - $env.JOB_NAME"
                 echo "BUILD_TAG - $env.BUILD_TAG"
                 echo "BUILD_URL - $env.BUILD_URL"
+                echo "GITCOMMIT - ${sh(returnStdout: true, script: 'git rev-parse HEAD')}"
             }            
         }
         stage("Test"){
