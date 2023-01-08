@@ -21,8 +21,8 @@ pipeline{
 	                echo "BUILD_URL - $env.BUILD_URL"
 	                echo "GIT_COMMIT - $env.GIT_COMMIT"
 	                echo "GIT_BRANCH - $env.GIT_BRANCH"
-	                sh 'mvn --version'
-	                sh 'docker version'
+                    echo "mavenHome - $mavenHome"
+                    echo "dockerHome - $dockerHome"
 		       }   
                      
         }
