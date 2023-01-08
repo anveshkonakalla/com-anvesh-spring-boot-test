@@ -8,13 +8,14 @@ pipeline{
     stages{
         stage("Build"){
             steps{
-                echo "========executing Build========"
-                echo "PATH - $PATH"
-                echo "BUILD_NUMBER - $env.BUILD_NUMBER"
-                echo "JOB_NAME - $env.JOB_NAME"
-                echo "BUILD_TAG - $env.BUILD_TAG"
-                echo "BUILD_URL - $env.BUILD_URL"
-                echo "GIT_COMMIT - $env.GIT_COMMIT"
+	                echo "========executing Build========"
+	                echo "PATH - $PATH"
+	                echo "BUILD_NUMBER - $env.BUILD_NUMBER"
+	                echo "JOB_NAME - $env.JOB_NAME"
+	                echo "BUILD_TAG - $env.BUILD_TAG"
+	                echo "BUILD_URL - $env.BUILD_URL"
+	                echo "GIT_COMMIT - $env.GIT_COMMIT"
+	                echo "GIT_BRANCH - $env.GIT_BRANCH"
 		       }            
         }
         stage("Test"){
