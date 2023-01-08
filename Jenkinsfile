@@ -8,7 +8,7 @@ pipeline{
     environment {
         dockerHome= tool 'myDocker'
         mavenHome= tool 'myMaven'
-        PATH="$myDocker/bin:$mavenHome/bin:$PATH"
+        PATH="$mavenHome/bin:$PATH"
     }
     stages{
         stage("Build"){
@@ -23,6 +23,7 @@ pipeline{
 	                echo "GIT_BRANCH - $env.GIT_BRANCH"
                     echo "mavenHome - $mavenHome"
                     echo "dockerHome - $dockerHome"
+                    sh 'mvn --version'
 		       }   
                      
         }
