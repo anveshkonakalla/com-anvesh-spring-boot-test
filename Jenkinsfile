@@ -5,6 +5,11 @@ pipeline{
          //   image 'maven:3.6.3'
         //}
    // }
+    environment {
+        dockerHome= tool 'myDocker'
+        mavenHome= tool 'myMaven'
+        PATH="$myDocker/bin:$mavenHome/bin:$PATH"
+    }
     stages{
         stage("Build"){
             steps{
@@ -16,9 +21,8 @@ pipeline{
 	                echo "BUILD_URL - $env.BUILD_URL"
 	                echo "GIT_COMMIT - $env.GIT_COMMIT"
 	                echo "GIT_BRANCH - $env.GIT_BRANCH"
-                    script {
-                        env.BUILD_NUMBER=env.GIT_COMMIT
-                    }
+	                sh 'mvn --version'
+	                sh 'docker version'
 		       }   
                      
         }
