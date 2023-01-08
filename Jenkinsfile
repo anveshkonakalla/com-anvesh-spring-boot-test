@@ -8,15 +8,11 @@ pipeline{
                 echo "========executing Build========"
             }            
         }
-    }
-    stages{
         stage("Test"){
             steps{
                 echo "========executing Test========"
             }            
         }
-    }
-    stages{
         stage("Integration Test"){
             steps{
                 echo "========executing Integration Test========"
