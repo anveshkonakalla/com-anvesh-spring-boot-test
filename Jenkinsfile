@@ -9,7 +9,7 @@ pipeline{
         stage("Build"){
             steps{
                 echo "========executing Build========"
-                echo "$PATH"
+                echo "PATH - $PATH"
                 echo "BUILD_NUMBER - $env.BUILD_NUMBER"
                 echo "JOB_NAME - $env.JOB_NAME"
                 echo "BUILD_TAG - $env.BUILD_TAG"
