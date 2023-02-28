@@ -39,6 +39,17 @@ pipeline{
                     	echo "NEXUS_VERSION: ${NEXUS_VERSION}"
                     	GIT_SIMPLE=sh([script: "git rev-list ${GIT_COMMIT} | head -n 1| cut -c 1-5", returnStdout:true]).trim()
                     	echo "GIT_SIMPLE: ${GIT_SIMPLE}"
+                    	build=currentBuild
+                    	while(build!=null && build.result!= 'SUCCESS') {
+                    		build=build.previousBuild
+                    	}
+                    	if(build==null) {
+                    		PREVIOUS_BUILD_VERSION="none"
+                    	} else {
+                    		PREVIOUS_BUILD_VERSION=build.displayName
+                    	}
+                    	echo "LAST Successful Build name:" ${PREVIOUS_BUILD_VERSION}
+                    	
                     	currentBuild.displayName="${BUILD_VERSION}.${NEXUS_VERSION}-${GIT_SIMPLE}"
                         
                     }
