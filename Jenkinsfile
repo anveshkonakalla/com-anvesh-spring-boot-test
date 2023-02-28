@@ -28,8 +28,18 @@ pipeline{
                     	if("${BRANCH_NAME}" == 'master'){
                     		echo "Branch name: ${BRANCH_NAME}"
                     		BUILD_VERSION='2023.99.0'
-                    		echo "Build version: ${BUILD_VERSION}"
+                    		echo "BUILD_VERSION: ${BUILD_VERSION}"
+                    	} else {
+                    		BUILD_VERSION = sh(script: "echo $env.GIT_BRANCH | sed -e 's|origin/||g'", returnStdout:true).trim()
+                    		echo "BUILD_VERSION: ${BUILD_VERSION}"
                     	}
+                    	GIT_COMMIT= sh([script: "git rev-parse HEAD", returnStdout:true]).trim()
+                    	echo "GIT_COMMIT: ${GIT_COMMIT}"
+                    	NEXUS_VERSION=sh([script: "git rev-list ${GIT_COMMIT} --count", returnStdout:true]).trim()
+                    	echo "NEXUS_VERSION: ${NEXUS_VERSION}"
+                    	GIT_SIMPLE=sh([script: "git rev-list ${GIT_COMMIT} | head -n 1-5", returnStdout:true]).trim()
+                    	echo "GIT_SIMPLE: ${GIT_SIMPLE}"
+                    	currentBuild.displayName="${BUILD_VERSION}.${NEXUS_VERSION}-${GIT_SIMPLE}"
                         
                     }
 		       }   
