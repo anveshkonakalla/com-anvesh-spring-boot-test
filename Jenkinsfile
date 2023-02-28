@@ -11,9 +11,9 @@ pipeline{
         PATH="$mavenHome/bin:$PATH"
     }
     stages{
-        stage("Build"){
+        stage("Build Setup"){
             steps{
-	                echo "========executing Build========"
+	                echo "========executing Build Setup========"
 	                echo "PATH - $PATH"
 	                echo "BUILD_NUMBER - $env.BUILD_NUMBER"
 	                echo "JOB_NAME - $env.JOB_NAME"
@@ -56,6 +56,18 @@ pipeline{
 		       }   
                      
         }
+        
+        stage("Build"){
+            steps{
+                echo "========executing Build========"
+                echo "BUILD_VERSION: ${BUILD_VERSION}"
+                configFileProvider([configFile(fileId:'artifactory-global-setting-file", variable: 'ArtifactoryGlobalSettings')]) {
+                	sh """mvn versions:set -DnewVersion=${BUILD_VERSION}-SNAPSHOT -B"""
+                }
+                sh """rm ${WORKSPACE}/target/*.war.original"""
+            }            
+        }
+        
         stage("Test"){
             steps{
                 echo "========executing Test========"
