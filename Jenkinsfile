@@ -37,7 +37,7 @@ pipeline{
                     	echo "GIT_COMMIT: ${GIT_COMMIT}"
                     	NEXUS_VERSION=sh([script: "git rev-list ${GIT_COMMIT} --count", returnStdout:true]).trim()
                     	echo "NEXUS_VERSION: ${NEXUS_VERSION}"
-                    	GIT_SIMPLE=sh([script: "git rev-list ${GIT_COMMIT} | head -n 1-5", returnStdout:true]).trim()
+                    	GIT_SIMPLE=sh([script: "git rev-list ${GIT_COMMIT} | head -n 1| cut -c 1-5", returnStdout:true]).trim()
                     	echo "GIT_SIMPLE: ${GIT_SIMPLE}"
                     	currentBuild.displayName="${BUILD_VERSION}.${NEXUS_VERSION}-${GIT_SIMPLE}"
                         
