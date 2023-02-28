@@ -22,7 +22,9 @@ pipeline{
 	                echo "GIT_COMMIT - $env.GIT_COMMIT"
 	                echo "GIT_BRANCH - $env.GIT_BRANCH"
                     echo "mavenHome - $mavenHome"
-                    sh(returnStdout: true, script: 'git rev-parse --abbrev-ref HEAD').trim()
+                    FULL_PATH_BRANCH = "${sh(script:'git name-rev --name-only HEAD', returnStdout: true)}"
+    				GIT_BRANCH = FULL_PATH_BRANCH.substring(FULL_PATH_BRANCH.lastIndexOf('/') + 1, FULL_PATH_BRANCH.length())
+    				echo "GIT_BRANCH $GIT_BRANCH"
                    
 		       }   
                      
