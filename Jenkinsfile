@@ -24,10 +24,13 @@ pipeline{
                     echo "mavenHome - $mavenHome"
                     echo "dockerHome - $dockerHome"
                     script {
-                    	def version = sh script: 'mvn help:evaluate -Dexpression=project.version -q -DforceStdout', returnStdout: true
-                		def artifactId = sh script: 'mvn help:evaluate -Dexpression=project.artifactId -q -DforceStdout', returnStdout: true
-                		echo version
-                		echo artifactId
+                    	BRANCH_NAME=sh(script: "echo $GIT_BRANCH | sed -e 's|origin/||g'", returnStdout:true).trim()
+                    	if("${BRANCH_NAME}" == 'master'){
+                    		echo "Branch name: ${BRANCH_NAME}"
+                    		BUILD_VERSION='2023.99.0'
+                    		echo "Build version: ${BUILD_VERSION}"
+                    	}
+                        
                     }
 		       }   
                      
