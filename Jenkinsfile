@@ -22,6 +22,8 @@ pipeline{
 	                echo "GIT_COMMIT - $env.GIT_COMMIT"
 	                echo "GIT_BRANCH - $env.GIT_BRANCH"
                     echo "mavenHome - $mavenHome"
+                    BRANCH_NAME = sh(returnStdout: true, script: 'git rev-parse --abbrev-ref HEAD').trim()
+                    echo "Branch name: ${BRANCH_NAME}"
                    
 		       }   
                      
