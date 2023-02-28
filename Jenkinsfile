@@ -23,7 +23,7 @@ pipeline{
 	                echo "GIT_BRANCH - $env.GIT_BRANCH"
                     echo "mavenHome - $mavenHome"
                     script {
-                    	BRANCH_NAME=sh(script: "echo $GIT_BRANCH | sed -e 's|origin/||g'", returnStdout:true).trim()
+                    	BRANCH_NAME=sh(script: "echo $env.GIT_BRANCH | sed -e 's|origin/||g'", returnStdout:true).trim()
                     	echo "Branch name: ${BRANCH_NAME}" 
                     	if("${BRANCH_NAME}" == 'master'){
                     		echo "Branch name: ${BRANCH_NAME}"
