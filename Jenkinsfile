@@ -22,9 +22,9 @@ pipeline{
 	                echo "GIT_COMMIT - $env.GIT_COMMIT"
 	                echo "GIT_BRANCH - $env.GIT_BRANCH"
                     echo "mavenHome - $mavenHome"
-                    echo "dockerHome - $dockerHome"
                     script {
                     	BRANCH_NAME=sh(script: "echo $GIT_BRANCH | sed -e 's|origin/||g'", returnStdout:true).trim()
+                    	echo "Branch name: ${BRANCH_NAME}" 
                     	if("${BRANCH_NAME}" == 'master'){
                     		echo "Branch name: ${BRANCH_NAME}"
                     		BUILD_VERSION='2023.99.0'
