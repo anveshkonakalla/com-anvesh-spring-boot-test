@@ -9,6 +9,8 @@ pipeline{
         dockerHome= tool 'myDocker'
         mavenHome= tool 'myMaven'
         PATH="$mavenHome/bin:$PATH"
+        FULL_PATH_BRANCH = "${sh(script:'git name-rev --name-only HEAD', returnStdout: true)}"
+        GIT_BRANCH = FULL_PATH_BRANCH.substring(FULL_PATH_BRANCH.lastIndexOf('/') + 1, FULL_PATH_BRANCH.length())
     }
     stages{
         stage("Build"){
@@ -23,8 +25,7 @@ pipeline{
 	                echo "GIT_BRANCH - $env.GIT_BRANCH"
                     echo "mavenHome - $mavenHome"
                     FULL_PATH_BRANCH = "${sh(script:'git name-rev --name-only HEAD', returnStdout: true)}"
-    				GIT_BRANCH = FULL_PATH_BRANCH.substring(FULL_PATH_BRANCH.lastIndexOf('/') + 1, FULL_PATH_BRANCH.length())
-    				echo "GIT_BRANCH $GIT_BRANCH"
+    				echo "GIT_BRANCH $env.GIT_BRANCH"
                    
 		       }   
                      
