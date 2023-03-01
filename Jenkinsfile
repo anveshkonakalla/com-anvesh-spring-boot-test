@@ -61,9 +61,10 @@ pipeline{
             steps{
                 echo "========executing Build========"
                 echo "BUILD_VERSION: ${BUILD_VERSION}"
-                configFileProvider([configFile(fileId: '416e4feb-c603-4664-b8a9-298354f8e2eb', variable: 'MyGlobalSettings')]) {
-        			sh 'mvn -s $MyGlobalSettings clean package'
+                configFileProvider([configFile(fileId:'416e4feb-c603-4664-b8a9-298354f8e2eb', variable: 'MyGlobalSettings')]) {
+                	sh """mvn versions:set -DnewVersion=${BUILD_VERSION}-SNAPSHOT -B"""
                 }
+                sh """rm ${WORKSPACE}/target/*.war.original"""
             }            
         }
         
