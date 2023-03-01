@@ -61,10 +61,9 @@ pipeline{
             steps{
                 echo "========executing Build========"
                 echo "BUILD_VERSION: ${BUILD_VERSION}"
-                configFileProvider([configFile(fileId:'artifactory-global-setting-file', variable: 'ArtifactoryGlobalSettings')]) {
-                	sh """mvn versions:set -DnewVersion=${BUILD_VERSION}-SNAPSHOT -B"""
+                configFileProvider([configFile(fileId: 'maven-settings', variable: 'MAVEN_SETTINGS')]) {
+        			sh 'mvn -s $MAVEN_SETTINGS clean package'
                 }
-                sh """rm ${WORKSPACE}/target/*.war.original"""
             }            
         }
         
