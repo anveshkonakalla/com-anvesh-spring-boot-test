@@ -60,7 +60,7 @@ pipeline{
         stage("Build"){
             steps{
                 echo "========executing Build========"
-                echo "BUILD_VERSION: ${BUILD_VERSION}.${NEXUS_VERSION}-${GIT_SIMPLE}""
+                echo "BUILD_VERSION: ${BUILD_VERSION}.${NEXUS_VERSION}-${GIT_SIMPLE}"
                 configFileProvider([configFile(fileId:'416e4feb-c603-4664-b8a9-298354f8e2eb', variable: 'MyGlobalSettings')]) {
                 	sh """mvn versions:set -DnewVersion=${BUILD_VERSION}.${NEXUS_VERSION}-${GIT_SIMPLE}-SNAPSHOT -B"""
                 }
