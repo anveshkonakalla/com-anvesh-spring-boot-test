@@ -64,7 +64,6 @@ pipeline{
                 configFileProvider([configFile(fileId:'416e4feb-c603-4664-b8a9-298354f8e2eb', variable: 'MyGlobalSettings')]) {
                 	sh """mvn versions:set -DnewVersion=${BUILD_VERSION}-SNAPSHOT -B"""
                 }
-                sh """rm ${WORKSPACE}/target/*.war.original"""
             }            
         }
         
