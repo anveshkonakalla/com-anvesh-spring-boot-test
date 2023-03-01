@@ -61,8 +61,8 @@ pipeline{
             steps{
                 echo "========executing Build========"
                 echo "BUILD_VERSION: ${BUILD_VERSION}"
-                configFileProvider([configFile(fileId: 'maven-settings', variable: 'MAVEN_SETTINGS')]) {
-        			sh 'mvn -s $MAVEN_SETTINGS clean package'
+                configFileProvider([configFile(fileId: '416e4feb-c603-4664-b8a9-298354f8e2eb', variable: 'MyGlobalSettings')]) {
+        			sh 'mvn -s $MyGlobalSettings clean package'
                 }
             }            
         }
